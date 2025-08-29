@@ -1,5 +1,5 @@
 import pygame
-import poligonos
+import poligons
 
 # Setup de Pygame
 pygame.init()
@@ -21,8 +21,8 @@ while running:
     screen.fill("black")
 
     #Vertices:
-    pentagono   = poligonos.shape_poligon( 5, screen.get_width() / 2, screen.get_height() / 2, 160)
-    decagono    = poligonos.shape_poligon(10, screen.get_width() / 2, screen.get_height() / 2, 320)
+    pentagono   = poligons.shape_poligon( 5, screen.get_width() / 2, screen.get_height() / 2, 160)
+    decagono    = poligons.shape_poligon(10, screen.get_width() / 2, screen.get_height() / 2, 320)
     # Pentagono:
     pygame.draw.polygon(screen, (255, 255, 255), pentagono, 5)
     
