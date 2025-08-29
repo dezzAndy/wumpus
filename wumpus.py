@@ -1,8 +1,9 @@
 import pygame
+import poligonos
 
 # Setup de Pygame
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+screen = pygame.display.set_mode((720, 720))
 clock = pygame.time.Clock()
 running = True
 dt = 0
@@ -19,21 +20,25 @@ while running:
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
 
-    pygame.draw.polygon(screen, (255, 255, 255), ((640.0, 110.0),
-                                                    (877.55, 277.64),
-                                                    (791.11, 552.36),
-                                                    (488.89, 552.36),
-                                                    (402.45, 277.64)), 5)
-    pygame.draw.polygon(screen, (255, 255, 255), [(640.00, 110.00),
-                                                    (493.05, 157.75),
-                                                    (402.24, 282.75),
-                                                    (402.24, 437.25),
-                                                    (493.05, 562.25),
-                                                    (640.00, 610.00),
-                                                    (786.95, 562.25),
-                                                    (877.76, 437.25),
-                                                    (877.76, 282.75),
-                                                    (786.95, 157.75)], 5)
+    #Vertices:
+    pentagono   = poligonos.shape_poligon( 5, screen.get_width() / 2, screen.get_height() / 2, 160)
+    decagono    = poligonos.shape_poligon(10, screen.get_width() / 2, screen.get_height() / 2, 320)
+    # Pentagono:
+    pygame.draw.polygon(screen, (255, 255, 255), pentagono, 5)
+    
+    # Decagono:
+    pygame.draw.polygon(screen, (255, 255, 255), decagono, 5)
+    
+    # Unión de los vértices del pentagono:
+    for i in range(len(pentagono)):
+        pygame.draw.line(screen, (255, 255, 255), pentagono[i], decagono[2*i], 5)
+        
+    # Círculos en los vértices
+    for i in range(len(pentagono)):
+        pygame.draw.circle(screen, (255, 255, 255), pentagono[i], 15)
+    for i in range(len(decagono)):
+        if i % 2 == 0:
+            pygame.draw.circle(screen, (255, 255, 255), decagono[i], 15)
 
     pygame.draw.circle(screen, "red", player_pos, 20)
 
